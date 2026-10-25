@@ -6,11 +6,22 @@ import Terms from "./Terms.jsx";
 // Dollars shown on the page are converted to rupees for UPI.
 const toInr = (usd) => Math.round(Number(usd) * CONFIG.usdToInr);
 
-function upiLink(usd) {
+function upiQuery(usd) {
   const p = new URLSearchParams({ pa: CONFIG.upiId, pn: CONFIG.payeeName, tn: CONFIG.note, cu: "INR" });
   if (usd) p.set("am", toInr(usd).toFixed(2));
-  return "upi://pay?" + p.toString().replace(/\+/g, "%20");
+  return p.toString().replace(/\+/g, "%20");
 }
+
+const upiLink = (usd) => "upi://pay?" + upiQuery(usd);
+
+// Generic upi:// links get grabbed by whichever app claimed them (often
+// WhatsApp on iPhone), so also offer each app's own link scheme.
+const UPI_APPS = [
+  ["Google Pay", "tez://upi/pay?"],
+  ["PhonePe", "phonepe://pay?"],
+  ["Paytm", "paytmmp://pay?"],
+  ["Other UPI app", "upi://pay?"],
+];
 
 // PayPal.me accepts an amount as a path suffix, e.g. <your link>/20USD
 function paypalLink(usd) {
@@ -189,9 +200,16 @@ function TipJar() {
             </button>
           </div>
 
-          <a className="btn btn-primary mobile-only" href={link}>
-            {amount ? `Pay ${usd(amount)} with UPI app` : "Pay with UPI app"}
-          </a>
+          <div className="upi-apps mobile-only">
+            <p className="hint">{amount ? `Pay ${usd(amount)} with` : "Pay with"}</p>
+            <div className="upi-app-grid">
+              {UPI_APPS.map(([label, scheme]) => (
+                <a key={label} className="btn btn-secondary" href={scheme + upiQuery(amount)}>
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
         </>
       ) : (
         <>

@@ -61,6 +61,9 @@ h1 { font-size: 26px; font-weight: 800; margin: 0 0 6px; }
 .btn { display: block; width: 100%; padding: 14px; border-radius: 14px; font-weight: 700; text-decoration: none; margin-top: 10px; font-size: 16px; }
 .btn-primary { background: var(--accent); color: var(--accent-text); }
 .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.upi-apps .hint { margin: 0 0 8px; }
+.upi-app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.upi-app-grid .btn { margin-top: 0; font-size: 15px; padding: 12px 8px; }
 button.btn { font: inherit; font-weight: 700; cursor: pointer; }
 .btn + .hint { margin-top: 10px; }
 .mobile-only { display: none; }
