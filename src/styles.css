@@ -29,13 +29,6 @@ h1 { font-size: 26px; font-weight: 800; margin: 0 0 6px; }
 }
 .socials a:hover { color: var(--accent); border-color: var(--accent); }
 
-.goal { text-align: left; background: var(--chip); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin: 0 0 24px; }
-.goal-head { display: flex; justify-content: space-between; gap: 8px; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
-.goal-nums { color: var(--muted); font-weight: 600; white-space: nowrap; }
-.bar { height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
-.fill { height: 100%; background: var(--accent); border-radius: 999px; transition: width .6s ease; }
-.goal-why { color: var(--muted); font-size: 14px; line-height: 1.5; margin: 10px 0 0; }
-
 .amounts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; }
 .amounts button, .custom input {
   font: inherit; font-weight: 600; border: 1px solid var(--border); background: var(--chip);

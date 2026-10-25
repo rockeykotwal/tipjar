@@ -81,32 +81,6 @@ function Socials() {
   );
 }
 
-function Goal({ goal }) {
-  const pct = Math.min(100, Math.round((goal.raised / goal.target) * 100));
-  const [width, setWidth] = useState(0);
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setWidth(pct));
-    return () => cancelAnimationFrame(id);
-  }, [pct]);
-
-  return (
-    <section className="goal">
-      <div className="goal-head">
-        <span>🎯 {goal.title}</span>
-        <span className="goal-nums">
-          {usd(goal.raised)} / {usd(goal.target)}
-        </span>
-      </div>
-      <div className="bar" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
-        <div className="fill" style={{ width: width + "%" }} />
-      </div>
-      <p className="goal-why">
-        {pct >= 100 ? "Goal reached — thank you all! 🎉 Extra tips go toward next month." : goal.why}
-      </p>
-    </section>
-  );
-}
-
 // Tiny hash router so the Terms page works on any static host.
 export default function App() {
   const [hash, setHash] = useState(window.location.hash);
@@ -163,8 +137,6 @@ function TipJar() {
       <h1>{CONFIG.name}</h1>
       <Socials />
       <p className="tagline">{CONFIG.tagline}</p>
-
-      {CONFIG.goal?.show && <Goal goal={CONFIG.goal} />}
 
       <div className="amounts">
         {CONFIG.amounts.map((a) => (
