@@ -19,7 +19,11 @@ const RULES = [
     ignoreLine: /^\s*-?\s*uses:/,
   },
   { name: "hardcoded PayPal link", re: /paypal\.me\/[\w-]+|paypal\.com\/(paypalme|donate|cgi-bin)[^\s"'`]*/gi },
-  { name: "UPI link built outside src/App.jsx", re: /upi:\/\/pay/gi, allowIn: ["src/App.jsx"] },
+  {
+    name: "UPI link built outside src/App.jsx",
+    re: /\b(upi|tez|gpay|phonepe|paytmmp|paytm|bhim)(:\/\/|:\\\/\\\/)/gi,
+    allowIn: ["src/App.jsx"],
+  },
   { name: "UPI 'pa' payee param outside src/App.jsx", re: /[?&{,\s]pa\s*[=:]\s*["'`]?[\w.-]+@/gi, allowIn: ["src/App.jsx"] },
 ];
 
