@@ -11,14 +11,6 @@ export const CONFIG = {
   avatar: "☕", // an emoji, or an image URL like "/me.jpg" (put the file in /public)
   tagline: "I build free tools and websites with AI. Help me keep my coding assistant running.",
 
-  goal: {
-    show: true,
-    title: "Claude Pro for this month",
-    target: 20, // $ per month
-    raised: 0, // $ — update by hand when you receive tips, then redeploy
-    why: "My AI coding assistant (Claude Code) costs about $20 a month. Everything I build with it stays free for you.",
-  },
-
   usdToInr: 88, // ₹ per $1 — check today's rate and update this once a month
 
   upiId: import.meta.env.VITE_UPI_ID || "", // your UPI ID — set in .env
