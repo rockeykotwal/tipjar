@@ -1,0 +1,42 @@
+# Fails any pull request from someone other than the repo owner that changes
+# where tips are paid (UPI ID, payee name or PayPal link).
+# Make it blocking: Settings → Branches → add a rule for main →
+# "Require status checks to pass" → select "protect-payment-details".
+name: protect-payment-details
+
+# pull_request_target runs this file as it is on main, so a PR can't edit the
+# check to skip itself. Safe here: the PR's code is only diffed, never run.
+on:
+  pull_request_target:
+
+permissions:
+  contents: read
+
+jobs:
+  protect-payment-details:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Block payment detail changes from others
+        env:
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          OWNER: ${{ github.repository_owner }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ "$AUTHOR" = "$OWNER" ]; then
+            echo "PR is from the repo owner — allowed."
+            exit 0
+          fi
+          git fetch --no-tags origin "$BASE"
+          changed=$(git diff "$BASE"...HEAD -- src/config.js | grep -E '^[+-][^+-]' | grep -Ei 'upiId|payeeName|paypal' || true)
+          if [ -n "$changed" ]; then
+            echo "::error::This PR changes payment details in src/config.js. Only the repo owner can change these."
+            echo "$changed"
+            exit 1
+          fi
+          echo "No payment detail changes."

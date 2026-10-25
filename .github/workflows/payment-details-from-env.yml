@@ -1,0 +1,40 @@
+# Fails if any file hardcodes a UPI ID or PayPal link instead of using the
+# VITE_UPI_ID / VITE_PAYPAL env vars. See scripts/check-payment-details.mjs.
+# Make it blocking: Settings → Branches → rule for main →
+# "Require status checks to pass" → select "payment-details-from-env".
+name: payment-details-from-env
+
+# For PRs, pull_request_target runs the checker as it is on main against the
+# PR's files, so a PR can't weaken the check to sneak a change through.
+# Safe here: the PR's files are only read, never executed.
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+
+permissions:
+  contents: read
+
+jobs:
+  payment-details-from-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout trusted checker (main)
+        uses: actions/checkout@v4
+        with:
+          path: trusted
+          persist-credentials: false
+
+      - name: Checkout code to check
+        uses: actions/checkout@v4
+        with:
+          path: target
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check payment details only come from env
+        run: node trusted/scripts/check-payment-details.mjs target

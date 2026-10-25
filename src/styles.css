@@ -1,0 +1,78 @@
+:root {
+  --bg: #fdf8f3; --card: #ffffff; --text: #1d1b19; --muted: #6f6a64;
+  --accent: #ff6b35; --accent-text: #ffffff; --border: #ece5dd; --chip: #f5efe8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141210; --card: #1f1c19; --text: #f4efe9; --muted: #a59e96;
+    --accent: #ff7a4a; --accent-text: #141210; --border: #2e2a26; --chip: #2a2622;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+  font-family: Inter, system-ui, sans-serif; display: grid; place-items: center; padding: 24px 16px;
+}
+.card {
+  width: 100%; max-width: 400px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 24px; padding: 32px 24px; text-align: center;
+}
+.avatar { font-size: 48px; line-height: 1; margin-bottom: 12px; }
+.avatar-img { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; margin-bottom: 12px; }
+h1 { font-size: 26px; font-weight: 800; margin: 0 0 6px; }
+.tagline { color: var(--muted); margin: 0 0 24px; line-height: 1.5; }
+
+.socials { display: flex; justify-content: center; gap: 10px; margin: 4px 0 12px; }
+.socials a {
+  display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+  background: var(--chip); border: 1px solid var(--border); color: var(--muted); transition: color .15s, border-color .15s;
+}
+.socials a:hover { color: var(--accent); border-color: var(--accent); }
+
+.goal { text-align: left; background: var(--chip); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin: 0 0 24px; }
+.goal-head { display: flex; justify-content: space-between; gap: 8px; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+.goal-nums { color: var(--muted); font-weight: 600; white-space: nowrap; }
+.bar { height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.fill { height: 100%; background: var(--accent); border-radius: 999px; transition: width .6s ease; }
+.goal-why { color: var(--muted); font-size: 14px; line-height: 1.5; margin: 10px 0 0; }
+
+.amounts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; }
+.amounts button, .custom input {
+  font: inherit; font-weight: 600; border: 1px solid var(--border); background: var(--chip);
+  color: var(--text); border-radius: 999px; padding: 8px 16px; cursor: pointer;
+}
+.amounts button.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.custom { margin-bottom: 20px; }
+.custom input { width: 150px; text-align: center; cursor: text; }
+
+.qr-wrap { background: #fff; border-radius: 16px; padding: 16px; display: inline-block; margin-bottom: 8px; }
+.qr-wrap svg { display: block; }
+.hint { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+
+.upi-id {
+  display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px;
+  font-family: ui-monospace, monospace; font-size: 15px; flex-wrap: wrap;
+}
+.upi-id button {
+  font: inherit; font-size: 13px; border: 1px solid var(--border); background: var(--chip);
+  color: var(--text); border-radius: 8px; padding: 4px 10px; cursor: pointer;
+}
+
+.btn { display: block; width: 100%; padding: 14px; border-radius: 14px; font-weight: 700; text-decoration: none; margin-top: 10px; font-size: 16px; }
+.btn-primary { background: var(--accent); color: var(--accent-text); }
+.btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+button.btn { font: inherit; font-weight: 700; cursor: pointer; }
+.btn + .hint { margin-top: 10px; }
+.mobile-only { display: none; }
+@media (hover: none) and (pointer: coarse) { .mobile-only { display: block; } }
+
+.disclaimer { color: var(--muted); font-size: 12px; line-height: 1.5; margin: 16px 0 0; }
+footer { color: var(--muted); font-size: 13px; margin-top: 24px; }
+.disclaimer a, footer a { color: inherit; }
+
+.legal { max-width: 640px; text-align: left; }
+.legal .back { color: var(--muted); text-decoration: none; font-size: 14px; }
+.legal h1 { margin-top: 16px; }
+.legal .updated { color: var(--muted); font-size: 13px; margin: 0 0 20px; }
+.legal h2 { font-size: 16px; margin: 24px 0 6px; }
+.legal p { line-height: 1.6; margin: 0 0 10px; }
