@@ -9,14 +9,14 @@ export const CONFIG = {
   youtube: "https://www.youtube.com/@Rockey_And_Simran",
   instagram: "https://www.instagram.com/tech_and_twirl/",
   avatar: "☕", // an emoji, or an image URL like "/me.jpg" (put the file in /public)
-  tagline: "I build free tools and websites with AI. Help me keep my coding assistant running.",
+  tagline: "Everything I build is free. If something I made helped you — this is how you say thanks.",
 
   usdToInr: 88, // ₹ per $1 — check today's rate and update this once a month
 
   upiId: import.meta.env.VITE_UPI_ID || "", // your UPI ID — set in .env
   payeeName: "Rockey Kotwal", // name as on your bank account
   note: "Support", // shows in the payer's UPI app
-  amounts: [1, 10, 20], // preset buttons ($)
+  amounts: [1, 20, 100], // preset buttons ($)
   defaultAmount: 20, // set to null for "any amount"
   // PayPal.me link for payers outside India — shown instead of the UPI QR when
   // the visitor's device isn't on Indian time. Leave "" to always show UPI.

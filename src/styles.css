@@ -37,6 +37,7 @@ h1 { font-size: 26px; font-weight: 800; margin: 0 0 6px; }
 .amounts button.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
 .custom { margin-bottom: 20px; }
 .custom input { width: 150px; text-align: center; cursor: text; }
+.field-hint { color: var(--muted); font-size: 12px; margin: 6px 0 0; }
 
 .qr-wrap { background: #fff; border-radius: 16px; padding: 16px; display: inline-block; margin-bottom: 8px; }
 .qr-wrap svg { display: block; }
