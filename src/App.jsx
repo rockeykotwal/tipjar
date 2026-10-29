@@ -116,9 +116,12 @@ function TipJar() {
 
   // inputMode is "decimal" so payers can type amounts like 2.50
   const onCustom = (e) => {
-    setCustom(e.target.value);
-    const v = parseFloat(e.target.value);
-    setAmount(v > 0 ? v : null);
+    const raw = e.target.value;
+    const v = parseFloat(raw);
+    if (v > 100) return;
+    setCustom(raw);
+    if (v >= 1) setAmount(v);
+    else setAmount(null);
   };
 
   const copy = async () => {
@@ -151,7 +154,8 @@ function TipJar() {
         ))}
       </div>
       <div className="custom">
-        <input type="number" min="1" inputMode="decimal" step="0.5" placeholder="Custom $" value={custom} onChange={onCustom} />
+        <input type="number" min="1" max="100" inputMode="numeric" step="1" placeholder="Custom $" value={custom} onChange={onCustom} />
+        <p className="field-hint">You can send any amount between $1 and $100</p>
       </div>
 
       {method === "upi" ? (
@@ -201,10 +205,6 @@ function TipJar() {
           {method === "upi" ? "Outside India? Pay with PayPal" : "In India? Pay with UPI"}
         </button>
       )}
-
-      <p className="disclaimer">
-        Tips are voluntary and non-refundable. Nothing is sold in return.
-      </p>
 
       <footer>
         {CONFIG.footer} · <a href="#terms">Terms &amp; Conditions</a>
