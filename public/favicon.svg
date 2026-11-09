@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- dark rounded background -->
+  <rect width="32" height="32" rx="8" fill="#1a1714"/>
+  <!-- subtle inner glow ring -->
+  <rect x="1" y="1" width="30" height="30" rx="7.2" fill="none" stroke="rgba(255,122,74,0.18)" stroke-width="1"/>
+  <!-- dollar sign -->
+  <text
+    x="16" y="23"
+    text-anchor="middle"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
+    font-weight="800"
+    font-size="21"
+    fill="#ff7a4a"
+    letter-spacing="-0.5"
+  >$</text>
+</svg>
