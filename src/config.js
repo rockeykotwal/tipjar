@@ -23,6 +23,13 @@ export const CONFIG = {
   paypal: import.meta.env.VITE_PAYPAL || "", // set in .env
   footer: "Thank you 🙏",
 
+  // Top supporters leaderboard — set VITE_TOP_TIPPERS in .env as a JSON array:
+  // [{"name":"Alice","amount":100},{"name":"Bob","amount":50}]
+  topTippers: (() => {
+    try { return JSON.parse(import.meta.env.VITE_TOP_TIPPERS || "[]").slice(0, 10); }
+    catch { return []; }
+  })(),
+
   // Shown on the Terms page (#terms)
   termsUpdated: "25 October 2026",
 };

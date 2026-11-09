@@ -81,6 +81,37 @@ function Socials() {
   );
 }
 
+function Background() {
+  return (
+    <div className="bg-blobs" aria-hidden="true">
+      <div className="blob blob-1" />
+      <div className="blob blob-2" />
+      <div className="blob blob-3" />
+    </div>
+  );
+}
+
+const MEDALS = ["🥇", "🥈", "🥉"];
+
+function TopTippers() {
+  const tippers = CONFIG.topTippers;
+  if (!tippers.length) return null;
+  return (
+    <section className="tippers-card">
+      <p className="tippers-heading">🏆 Top Supporters</p>
+      <ol className="tippers-list">
+        {tippers.map((t, i) => (
+          <li key={i} className={`tipper-row${i < 3 ? " tipper-top" : ""}`}>
+            <span className="tipper-rank">{MEDALS[i] ?? `#${i + 1}`}</span>
+            <span className="tipper-name">{t.name}</span>
+            <span className="tipper-amount">{usd(t.amount)}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
 // Tiny hash router so the Terms page works on any static host.
 export default function App() {
   const [hash, setHash] = useState(window.location.hash);
@@ -93,7 +124,16 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  return hash === "#terms" ? <Terms /> : <TipJar />;
+  if (hash === "#terms") return <Terms />;
+  return (
+    <>
+      <Background />
+      <div className="page-wrap">
+        <TipJar />
+        <TopTippers />
+      </div>
+    </>
+  );
 }
 
 function TipJar() {
@@ -157,6 +197,12 @@ function TipJar() {
         <input type="number" min="1" max="100" inputMode="numeric" step="1" placeholder="Custom $" value={custom} onChange={onCustom} />
         <p className="field-hint">You can send any amount between $1 and $100</p>
       </div>
+
+      {method === "paypal" && (
+        <button type="button" className="back-btn" onClick={() => setMethod("upi")}>
+          ← Back
+        </button>
+      )}
 
       {method === "upi" ? (
         <>
